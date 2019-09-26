@@ -1,4 +1,23 @@
 """All the constants used in the game are declared here."""
+
+
+class Ranges:
+    MIN_LOW_RANGE = 18
+    MAX_LOW_RANGE = 25
+    MIN_HIGH_RANGE = 10
+    MAX_HIGH_RANGE = 35
+
+
+class ActionNums:
+    ACTION_DAMAGE_LOW_RANGE = 1
+    ACTION_DAMAGE_HIGH_RANGE = 2
+    ACTION_USE_FIRST_AID_KIT = 3
+
+
+class NumPlayers:
+    MIN_NUM_PLAYERS = 2
+
+
 ACTION_DAMAGE_LOW_RANGE = 1
 ACTION_DAMAGE_HIGH_RANGE = 2
 ACTION_USE_FIRST_AID_KIT = 3

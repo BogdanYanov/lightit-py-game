@@ -18,8 +18,6 @@ class Game:
 
     def add_players(self, *players):
         """Method of adding players"""
-        for player in self.__players:
-            print(player.get_name())
         for player in players:
             if player not in self.__players:
                 # If a player already exists in the game,
@@ -34,27 +32,27 @@ class Game:
         """
         enemy = self.__players[enemy_id]
 
-        if action_num == CONST.ACTION_DAMAGE_LOW_RANGE:
-            damage = self.__current_user.deals_damage(CONST.MIN_LOW_RANGE, CONST.MAX_LOW_RANGE)
+        if action_num == CONST.ActionNums.ACTION_DAMAGE_LOW_RANGE:
+            damage = self.__current_user.deals_damage(CONST.Ranges.MIN_LOW_RANGE, CONST.Ranges.MAX_LOW_RANGE)
             enemy.set_health(enemy.get_health() - damage)
             print(self.__current_user.get_name() + " deals " + str(damage) + " HP to " + enemy.get_name() + ". " +
                   "Now " + enemy.get_name() + " has " + str(enemy.get_health()) + " HP")
 
-        elif action_num == CONST.ACTION_DAMAGE_HIGH_RANGE:
-            damage = self.__current_user.deals_damage(CONST.MIN_HIGH_RANGE, CONST.MAX_HIGH_RANGE)
+        elif action_num == CONST.ActionNums.ACTION_DAMAGE_HIGH_RANGE:
+            damage = self.__current_user.deals_damage(CONST.Ranges.MIN_HIGH_RANGE, CONST.Ranges.MAX_HIGH_RANGE)
             enemy.set_health(enemy.get_health() - damage)
             print(self.__current_user.get_name() + " deals " + str(damage) + " HP to " + enemy.get_name() + ". " +
                   "Now " + enemy.get_name() + " has " + str(enemy.get_health()) + " HP")
 
         else:
-            additional_health = self.__current_user.use_first_aid_kit(CONST.MIN_LOW_RANGE, CONST.MAX_LOW_RANGE)
+            additional_health = self.__current_user.use_first_aid_kit(CONST.Ranges.MIN_LOW_RANGE, CONST.Ranges.MAX_LOW_RANGE)
             self.__current_user.set_health(self.__current_user.get_health() + additional_health)
             print(self.__current_user.get_name() + " recovery " + str(additional_health) + " HP. " +
                   "Now " + self.__current_user.get_name() + " has " + str(self.__current_user.get_health()) + " HP")
 
     def start(self):
         """A method that directly triggers the game"""
-        if len(self.__players) < CONST.MIN_NUM_PLAYERS:
+        if len(self.__players) < CONST.NumPlayers.MIN_NUM_PLAYERS:
             print("Not enough players to start. Please, add at least two players")
             # Check for enough players
             return
@@ -86,14 +84,14 @@ class Game:
             self.select_action(enemy_id, func_num)
 
             # Check the enemy health
-            if self.__players[enemy_id].get_health() == 0 and len(self.__players) > CONST.MIN_NUM_PLAYERS:
+            if self.__players[enemy_id].get_health() == 0 and len(self.__players) > CONST.NumPlayers.MIN_NUM_PLAYERS:
                 # If the enemy has no health left,
                 # but the participants of the game are more than two,
                 # then simply this user is removed
                 print(self.__players[enemy_id].get_name() + " lost and leaves the game.")
                 del self.__players[enemy_id]
 
-            elif self.__players[enemy_id].get_health() == 0 and len(self.__players) == CONST.MIN_NUM_PLAYERS:
+            elif self.__players[enemy_id].get_health() == 0 and len(self.__players) == CONST.NumPlayers.MIN_NUM_PLAYERS:
                 # If the enemy has no health left,
                 # but the participants of the game are two,
                 # then we determine the winner
